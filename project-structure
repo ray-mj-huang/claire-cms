@@ -1,0 +1,54 @@
+personal-blog/
+├── src/
+│   ├── components/         # 可重用的 UI 組件
+│   │   ├── common/        # 通用組件
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Button.jsx
+│   │   │   └── Loading.jsx
+│   │   ├── admin/         # 管理後台相關組件
+│   │   │   ├── PostEditor.jsx
+│   │   │   ├── TagManager.jsx
+│   │   │   └── ThemeSettings.jsx
+│   │   └── layout/        # 布局相關組件
+│   │       └── MainLayout.jsx
+│   ├── pages/             # 頁面組件
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Blog/
+│   │   │   ├── BlogList.jsx
+│   │   │   └── BlogPost.jsx
+│   │   ├── Products.jsx
+│   │   ├── Services.jsx
+│   │   ├── Events.jsx
+│   │   └── Admin/
+│   │       ├── Dashboard.jsx
+│   │       ├── PostManagement.jsx
+│   │       └── Settings.jsx
+│   ├── features/          # Redux 相關功能模組
+│   │   ├── auth/
+│   │   ├── posts/
+│   │   └── settings/
+│   ├── services/          # API 和服務
+│   │   ├── firebase.js
+│   │   └── stripe.js
+│   ├── hooks/            # 自定義 Hooks
+│   │   ├── useAuth.js
+│   │   └── usePosts.js
+│   ├── utils/            # 工具函數
+│   │   ├── formatDate.js
+│   │   └── validation.js
+│   ├── styles/           # 樣式文件
+│   │   └── globals.css
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── routes.jsx        # 路由配置
+├── public/               # 靜態資源
+│   ├── images/
+│   └── favicon.ico
+├── .env                  # 環境變數
+├── .gitignore
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+└── README.md 
