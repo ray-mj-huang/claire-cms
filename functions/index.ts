@@ -1,11 +1,13 @@
 require('dotenv').config()
 const functions = require('firebase-functions')
-const { projectID } = require('firebase-functions/params');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const cors = require('cors')({origin: true})
 
+// 導入 Express 類型
+import { Request, Response } from 'express';
+
 // 創建 checkout session
-exports.createCheckoutSession = functions.https.onRequest((req, res) => {
+exports.createCheckoutSession = functions.https.onRequest((req: Request, res: Response) => {
   cors(req, res, async () => {
     if (req.method !== 'POST') {
       res.status(405).send('Method Not Allowed')
@@ -40,7 +42,7 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
       })
 
       res.json({ data: { clientSecret: session.client_secret } })
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating checkout session:', error)
       res.status(500).json({ 
         data: { 
@@ -52,7 +54,7 @@ exports.createCheckoutSession = functions.https.onRequest((req, res) => {
 })
 
 // 獲取 session 狀態
-exports.sessionStatus = functions.https.onRequest((req, res) => {
+exports.sessionStatus = functions.https.onRequest((req: Request, res: Response) => {
   cors(req, res, async () => {
     if (req.method !== 'POST') {
       res.status(405).send('Method Not Allowed')
@@ -69,7 +71,7 @@ exports.sessionStatus = functions.https.onRequest((req, res) => {
           customer_email: session.customer_details?.email
         }
       })
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error retrieving session:', error)
       res.status(500).json({ 
         data: { 

@@ -5,13 +5,14 @@
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "build": "tsc",
+    "deploy": "npm run build && firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "engines": {
     "node": "22"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -20,7 +21,10 @@
     "stripe": "^17.7.0"
   },
   "devDependencies": {
-    "firebase-functions-test": "^3.1.0"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^5.8.2"
   },
   "private": true
 }
