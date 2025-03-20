@@ -1,18 +1,29 @@
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js'
 import { stripePromise, createCheckoutSession } from '../../services/stripe'
 
-export default function StripeCheckout({ product }) {
-  const [error, setError] = useState(null)
+interface Product {
+  name: string;
+  price: number;
+  description?: string;
+  image?: string;
+}
 
-  const fetchClientSecret = useCallback(async () => {
+interface StripeCheckoutProps {
+  product: Product;
+}
+
+const StripeCheckout = ({ product }: StripeCheckoutProps): React.ReactElement => {
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchClientSecret = useCallback(async (): Promise<string> => {
     try {
       setError(null)
       const clientSecret = await createCheckoutSession({
         name: product.name,
         price: product.price,
-        description: product.description,
-        image: product.image
+        description: product.description || '',
+        image: product.image || null
       })
       return clientSecret
     } catch (err) {
@@ -39,4 +50,6 @@ export default function StripeCheckout({ product }) {
       </EmbeddedCheckoutProvider>
     </div>
   )
-} 
+}
+
+export default StripeCheckout; 
