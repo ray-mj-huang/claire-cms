@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { 
   DocumentTextIcon, 
@@ -9,14 +10,20 @@ import {
   ShoppingBagIcon
 } from '@heroicons/react/24/outline'
 
-const navigation = [
+interface NavigationItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+const navigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/admin', icon: ChartBarIcon },
   { name: 'Posts', href: '/admin/posts', icon: DocumentTextIcon },
   { name: 'Products', href: '/admin/products', icon: ShoppingBagIcon },
   { name: 'Settings', href: '/admin/settings', icon: Cog6ToothIcon },
 ]
 
-export default function AdminLayout() {
+const AdminLayout = (): React.ReactElement => {
   const location = useLocation()
 
   return (
@@ -106,4 +113,6 @@ export default function AdminLayout() {
       </div>
     </div>
   )
-} 
+}
+
+export default AdminLayout; 

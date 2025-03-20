@@ -1,8 +1,9 @@
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../common/Navbar'
 import Footer from '../common/Footer'
 
-export default function MainLayout() {
+const MainLayout = (): React.ReactElement => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
@@ -12,4 +13,6 @@ export default function MainLayout() {
       <Footer />
     </div>
   )
-} 
+}
+
+export default MainLayout; 
