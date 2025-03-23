@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../services/firebase'
 import { setUser, setLoading, setError } from '../features/auth/authSlice'
+import { RootState, AppDispatch } from '../features/store'
 
 export function useAuth() {
-  const dispatch = useDispatch()
-  const { user, loading, error } = useSelector((state) => state.auth)
+  const dispatch = useDispatch<AppDispatch>()
+  const { user, loading, error } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
     dispatch(setLoading(true))
@@ -14,7 +15,7 @@ export function useAuth() {
         dispatch(setUser(user))
         dispatch(setLoading(false))
       },
-      (error) => {
+      (error: Error) => {
         dispatch(setError(error.message))
         dispatch(setLoading(false))
       }
