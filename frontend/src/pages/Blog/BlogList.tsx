@@ -1,14 +1,16 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { getPosts } from '../../features/posts/postsSlice'
-import Loading from '../../components/common/Loading'  // 添加這行
+import Loading from '../../components/common/Loading'
 import PageHeader from '../../components/common/PageHeader'
+import { RootState, AppDispatch } from '../../features/store'
+import { Post } from '../../types/post'
 
-export default function BlogList() {
-  const dispatch = useDispatch()
-  const { posts, postsStatus, postsError } = useSelector((state) => state.posts)
+const BlogList = (): React.ReactElement => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { posts, postsStatus, postsError } = useSelector((state: RootState) => state.posts)
 
   useEffect(() => {
     if (postsStatus === 'idle') {
@@ -24,7 +26,7 @@ export default function BlogList() {
     return <div>Error: {postsError}</div>
   }
 
-  const publishedPosts = posts.filter(post => post.status === 'published')
+  const publishedPosts = posts.filter((post: Post) => post.status === 'published')
 
   return (
     <div>
@@ -34,7 +36,7 @@ export default function BlogList() {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid gap-16 lg:grid-cols-2">
-          {publishedPosts.map((post) => (
+          {publishedPosts.map((post: Post) => (
             <article key={post.id} className="flex flex-col">
               <Link to={`/blog/${post.id}`} className="group">
                 <div className="aspect-w-16 aspect-h-9 mb-4 overflow-hidden rounded-lg bg-gray-100">
@@ -58,7 +60,7 @@ export default function BlogList() {
                 <time dateTime={post.createdAt?.toISOString()}>
                   {post.createdAt ? format(post.createdAt, 'MMM d, yyyy') : 'Date not available'}
                 </time>
-                {post.tags?.length > 0 && (
+                {post.tags && post.tags.length > 0 && (
                   <>
                     <span className="mx-1">•</span>
                     <div className="flex gap-2">
@@ -77,4 +79,6 @@ export default function BlogList() {
       </div>
     </div>
   )
-} 
+}
+
+export default BlogList 

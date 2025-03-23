@@ -1,4 +1,6 @@
-export default function Home() {
+import React from 'react'
+
+const Home = (): React.ReactElement => {
   return (
     <div className="bg-white">
       <div className="relative isolate px-6 lg:px-8">
@@ -15,4 +17,6 @@ export default function Home() {
       </div>
     </div>
   )
-} 
+}
+
+export default Home 

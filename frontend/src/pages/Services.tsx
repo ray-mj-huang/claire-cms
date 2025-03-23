@@ -1,6 +1,7 @@
+import React from 'react'
 import PageHeader from '../components/common/PageHeader'
 
-export default function Services() {
+const Services = (): React.ReactElement => {
   return (
     <>
       <PageHeader 
@@ -9,4 +10,6 @@ export default function Services() {
       />
     </>
   )
-} 
+}
+
+export default Services 

@@ -1,6 +1,7 @@
+import React from 'react'
 import PageHeader from '../components/common/PageHeader'
 
-export default function Events() {
+const Events = (): React.ReactElement => {
   return (
     <>
       <PageHeader 
@@ -9,4 +10,6 @@ export default function Events() {
       />
     </>
   )
-} 
+}
+
+export default Events 

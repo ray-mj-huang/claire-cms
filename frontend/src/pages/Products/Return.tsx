@@ -2,9 +2,15 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getSessionStatus } from '../../services/stripe'
 
-export default function Return() {
-  const [status, setStatus] = useState(null)
-  const [customerEmail, setCustomerEmail] = useState('')
+interface SessionStatusResponse {
+  status: string;
+  customer_email?: string;
+  payment_status?: string;
+}
+
+const Return = (): React.ReactElement => {
+  const [status, setStatus] = useState<string | null>(null)
+  const [customerEmail, setCustomerEmail] = useState<string>('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -14,11 +20,13 @@ export default function Return() {
 
     if (sessionId) {
       getSessionStatus(sessionId)
-        .then((data) => {
+        .then((data: SessionStatusResponse) => {
           setStatus(data.status)
-          setCustomerEmail(data.customer_email)
+          if (data.customer_email) {
+            setCustomerEmail(data.customer_email)
+          }
         })
-        .catch((error) => {
+        .catch((error: Error) => {
           console.error('Error fetching session status:', error)
         })
     }
@@ -26,7 +34,7 @@ export default function Return() {
 
   if (status === 'open') {
     navigate('/products')
-    return null
+    return <div className="hidden"></div>
   }
 
   if (status === 'complete') {
@@ -53,5 +61,8 @@ export default function Return() {
     )
   }
 
-  return null
-} 
+  // Return a loading or default state instead of null
+  return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">Checking payment status...</div>
+}
+
+export default Return 

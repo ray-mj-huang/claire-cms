@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductById, clearCurrentViewingProduct, setCurrentCheckoutProduct } from '../../features/products/productsSlice'
 import Loading from '../../components/common/Loading'
+import { RootState, AppDispatch } from '../../features/store'
 
-export default function ProductDetail() {
-  const { productId } = useParams()
+const ProductDetail = (): React.ReactElement => {
+  const { productId } = useParams<{ productId: string }>()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { currentViewingProduct, currentViewingProductStatus, currentViewingProductError } = useSelector((state) => state.products)
+  const dispatch = useDispatch<AppDispatch>()
+  const { currentViewingProduct, currentViewingProductStatus, currentViewingProductError } = 
+    useSelector((state: RootState) => state.products)
 
   useEffect(() => {
     if (productId) {
@@ -19,9 +21,11 @@ export default function ProductDetail() {
     }
   }, [productId, dispatch])
 
-  const handlePurchase = () => {
-    dispatch(setCurrentCheckoutProduct(currentViewingProduct))
-    navigate(`/checkout/${currentViewingProduct.id}`)
+  const handlePurchase = (): void => {
+    if (currentViewingProduct) {
+      dispatch(setCurrentCheckoutProduct(currentViewingProduct))
+      navigate(`/checkout/${currentViewingProduct.id}`)
+    }
   }
 
   if (currentViewingProductStatus === 'loading') {
@@ -76,7 +80,7 @@ export default function ProductDetail() {
           
           <div className="mt-4">
             <span className="text-3xl font-bold text-gray-900">
-              ${currentViewingProduct.price}
+              ${currentViewingProduct.price.toFixed(2)}
             </span>
           </div>
           
@@ -105,4 +109,6 @@ export default function ProductDetail() {
       </div>
     </div>
   )
-} 
+}
+
+export default ProductDetail 

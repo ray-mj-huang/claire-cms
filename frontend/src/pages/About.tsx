@@ -1,6 +1,7 @@
+import React from 'react'
 import PageHeader from '../components/common/PageHeader'
 
-export default function About() {
+const About = (): React.ReactElement => {
   return (
     <>
       <PageHeader 
@@ -10,3 +11,5 @@ export default function About() {
     </>
   )
 }
+
+export default About
