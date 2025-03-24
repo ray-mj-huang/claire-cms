@@ -1,7 +1,11 @@
-import { collection, addDoc, getDocs, getDoc, doc, serverTimestamp, updateDoc, deleteDoc, DocumentSnapshot } from 'firebase/firestore'
+import { collection, addDoc, getDocs, getDoc, doc, serverTimestamp, updateDoc, deleteDoc, DocumentSnapshot, Timestamp, FieldValue } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { db, storage } from './firebase'
 import { Product, FirestoreProduct, ProductFormData } from '../types/product'
+
+const toDate = (timestamp: Timestamp | FieldValue | null): Date | null => {
+  return timestamp instanceof Timestamp ? timestamp.toDate() : null
+}
 
 // 輔助函數：轉換 Firestore 數據
 const convertTimestamps = (doc: DocumentSnapshot): Product => {
@@ -13,8 +17,8 @@ const convertTimestamps = (doc: DocumentSnapshot): Product => {
     description: data.description || '',
     image: data.image || null,
     status: data.status || 'active',
-    createdAt: data.createdAt ? data.createdAt.toDate().toISOString() : new Date().toISOString(),
-    updatedAt: data.updatedAt ? data.updatedAt.toDate().toISOString() : new Date().toISOString()
+    createdAt: toDate(data.createdAt)?.toISOString() || new Date().toISOString(),
+    updatedAt: toDate(data.updatedAt)?.toISOString() || new Date().toISOString()
   }
   
   console.log('Converted product:', converted) // 添加日誌

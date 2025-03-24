@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './routes'
 import { testConnection } from './services/firebase'
 
-const App: React.FC = () => {
+const App = (): React.ReactElement => {
   useEffect(() => {
     testConnection()
   }, [])
