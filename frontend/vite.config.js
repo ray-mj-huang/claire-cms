@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
@@ -13,6 +14,12 @@ export default defineConfig({
     exclude: ['react-icons/fa', 'react-icons/md']
   },
   build: {
-    outDir: './build'
+    outDir: 'build'
+  },
+  resolve: {
+    alias: {
+      'src': path.resolve(__dirname, './src')
+    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   }
 }) 
