@@ -5,7 +5,7 @@ export interface Post {
   title: string
   content: string
   coverImage: string | null
-  tags: string[]
+  tags: string
   status: 'draft' | 'published'
   createdAt: Date | null
   updatedAt: Date | null

@@ -6,32 +6,26 @@ import MDEditor from '@uiw/react-md-editor'
 import { savePost, uploadPostImage } from '../../../features/posts/postsSlice'
 import Loading from '../../../components/common/Loading'
 import { RootState, AppDispatch } from '../../../features/store'
-
-// Define local form data interface that uses string for tags instead of string[]
-interface NewPostFormData {
-  title: string;
-  content: string;
-  coverImage: string | null;
-  tags: string;
-  status: 'draft' | 'published';
-}
+import { Post } from '../../../types/post'
 
 const NewPost = (): React.ReactElement => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const { status } = useSelector((state: RootState) => state.posts)
-  const [formData, setFormData] = useState<NewPostFormData>({
+  const [formData, setFormData] = useState<Post>({
     title: '',
     content: '',
     coverImage: null,
     tags: '',
-    status: 'draft'
+    status: 'draft',
+    id: '',
+    createdAt: null,
+    updatedAt: null
   })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
     try {
-      // Process tags
       const tagsArray = formData.tags
         .split(',')
         .map(tag => tag.trim())
