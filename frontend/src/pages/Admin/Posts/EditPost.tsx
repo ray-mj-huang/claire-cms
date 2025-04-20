@@ -1,29 +1,24 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { getPostById, updatePostById, uploadPostImage } from '../../../features/posts/postsSlice'
 import Loading from '../../../components/common/Loading'
 import { RootState, AppDispatch } from '../../../features/store'
-
-interface PostFormData {
-  title: string;
-  content: string;
-  coverImage: string | null;
-  tags: string;
-  status: 'draft' | 'published';
-}
+import { PostFormData } from '../../../types/post'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 const EditPost = (): React.ReactElement => {
   const { postId } = useParams<{ postId: string }>()
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const { currentViewingPost, currentViewingPostStatus, updateStatus } = useSelector((state: RootState) => state.posts)
+  const { currentViewingPost, currentViewingPostStatus } = useSelector((state: RootState) => state.posts)
   const [formData, setFormData] = useState<PostFormData>({
     title: '',
     content: '',
     coverImage: null,
-    tags: '',
+    tags: [],
     status: 'draft'
   })
 
@@ -31,36 +26,30 @@ const EditPost = (): React.ReactElement => {
     if (postId) {
       dispatch(getPostById(postId))
     }
-  }, [postId, dispatch])
+  }, [dispatch, postId])
 
   useEffect(() => {
     if (currentViewingPost) {
       setFormData({
-        title: currentViewingPost.title || '',
-        content: currentViewingPost.content || '',
-        coverImage: currentViewingPost.coverImage || null,
-        tags: currentViewingPost.tags ? currentViewingPost.tags.join(',') : '',
-        status: currentViewingPost.status || 'draft'
+        title: currentViewingPost.title,
+        content: currentViewingPost.content,
+        coverImage: currentViewingPost.coverImage,
+        tags: Array.isArray(currentViewingPost.tags) ? currentViewingPost.tags : [],
+        status: currentViewingPost.status
       })
     }
   }, [currentViewingPost])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
     if (!postId) return
-    
-    try {
-      // Process tags
-      const tagsArray = formData.tags
-        .split(',')
-        .map(tag => tag.trim())
-        .filter(tag => tag !== '')
 
+    try {
       await dispatch(updatePostById({
         postId,
         postData: {
           ...formData,
-          tags: tagsArray
+          tags: formData.tags
         }
       })).unwrap()
       
@@ -70,22 +59,29 @@ const EditPost = (): React.ReactElement => {
     }
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = e.target
+    if (name === 'tags') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }))
+    }
+  }
+
+  const handleContentChange = (content: string): void => {
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      content
     }))
   }
 
-  const handleContentChange = (value: string | undefined): void => {
-    setFormData(prev => ({
-      ...prev,
-      content: value || ''
-    }))
-  }
-
-  const handleCoverImageUpload = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
+  const handleCoverImageUpload = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     if (!e.target.files || e.target.files.length === 0) {
       return
     }
@@ -111,25 +107,12 @@ const EditPost = (): React.ReactElement => {
     }))
   }
 
-  if (currentViewingPostStatus === 'loading') {
+  if (currentViewingPostStatus as string === 'loading') {
     return <Loading />
   }
 
-  if (!currentViewingPost && currentViewingPostStatus === 'succeeded') {
-    return (
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <div className="bg-red-50 border-l-4 border-red-400 p-4">
-          <p className="text-red-700">Post not found</p>
-        </div>
-        <button
-          type="button"
-          onClick={() => navigate('/admin/posts')}
-          className="mt-4 text-sm text-indigo-600 hover:text-indigo-500"
-        >
-          ← Back to posts
-        </button>
-      </div>
-    )
+  if (!currentViewingPost) {
+    return <div>Post not found</div>
   }
 
   return (
@@ -178,11 +161,24 @@ const EditPost = (): React.ReactElement => {
                     Content
                   </label>
                   <div className="mt-1">
-                    {/* <MDEditor
+                    <ReactQuill
                       value={formData.content}
                       onChange={handleContentChange}
-                      height={400}
-                    /> */}
+                      className="h-64 mb-12"
+                      modules={{
+                        toolbar: [
+                          [{ 'header': [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike'],
+                          ['blockquote', 'code-block'],
+                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                          [{ 'script': 'sub'}, { 'script': 'super' }],
+                          [{ 'indent': '-1'}, { 'indent': '+1' }],
+                          [{ 'color': [] }, { 'background': [] }],
+                          ['link', 'image'],
+                          ['clean']
+                        ]
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -243,7 +239,7 @@ const EditPost = (): React.ReactElement => {
                       type="text"
                       name="tags"
                       id="tags"
-                      value={formData.tags}
+                      value={formData.tags.join(', ')}
                       onChange={handleChange}
                       placeholder="tag1, tag2, tag3"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -285,14 +281,14 @@ const EditPost = (): React.ReactElement => {
             </button>
             <button
               type="submit"
-              disabled={updateStatus === 'loading'}
+              disabled={currentViewingPostStatus as string === 'loading'}
               className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                updateStatus === 'loading'
+                currentViewingPostStatus as string === 'loading'
                   ? 'bg-indigo-400 cursor-not-allowed'
                   : 'bg-indigo-600 hover:bg-indigo-700'
               }`}
             >
-              {updateStatus === 'loading' ? 'Saving...' : 'Save'}
+              {currentViewingPostStatus as string === 'loading' ? 'Saving...' : 'Save'}
             </button>
           </div>
         </div>
