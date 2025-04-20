@@ -4,6 +4,7 @@ import { StrictMode } from 'react'
 import App from './App'
 import { store } from './features/store'
 import './styles/globals.css'
+import 'react-quill/dist/quill.snow.css'
 
 const rootElement = document.getElementById('root')
 

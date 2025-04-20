@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'date-fns'
-import ReactMarkdown from 'react-markdown'
 import { getPostById } from '../../features/posts/postsSlice'
 import Loading from '../../components/common/Loading'
 import { RootState, AppDispatch } from '../../features/store'
@@ -50,9 +49,9 @@ const BlogPost = (): React.ReactElement => {
                 {format(currentViewingPost.createdAt, 'MMMM d, yyyy')}
               </time>
             )}
-            {currentViewingPost.tags && currentViewingPost.tags.length > 0 && (
+            {currentViewingPost.tags && Array.isArray(currentViewingPost.tags) && currentViewingPost.tags.length > 0 && (
               <div className="mt-2 flex flex-wrap justify-center gap-2">
-                {currentViewingPost.tags.map((tag) => (
+                {currentViewingPost.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm"
@@ -65,24 +64,10 @@ const BlogPost = (): React.ReactElement => {
           </div>
         </div>
         <div className="prose prose-lg mx-auto">
-          <ReactMarkdown
-            components={{
-              h1: ({children}) => <h1 className="text-2xl font-bold mb-4">{children}</h1>,
-              h2: ({children}) => <h2 className="text-xl font-bold mb-3">{children}</h2>,
-              h3: ({children}) => <h3 className="text-lg font-bold mb-2">{children}</h3>,
-              p: ({children}) => <p className="mb-4">{children}</p>,
-              ul: ({children}) => <ul className="list-disc pl-5 mb-4">{children}</ul>,
-              ol: ({children}) => <ol className="list-decimal pl-5 mb-4">{children}</ol>,
-              li: ({children}) => <li className="mb-1">{children}</li>,
-              blockquote: ({children}) => (
-                <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4">
-                  {children}
-                </blockquote>
-              ),
-            }}
-          >
-            {currentViewingPost.content}
-          </ReactMarkdown>
+          <div 
+            dangerouslySetInnerHTML={{ __html: currentViewingPost.content }}
+            className="ql-editor"
+          />
         </div>
       </article>
       <div className="mt-8">

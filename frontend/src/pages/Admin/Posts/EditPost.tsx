@@ -2,7 +2,6 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import MDEditor from '@uiw/react-md-editor'
 import { getPostById, updatePostById, uploadPostImage } from '../../../features/posts/postsSlice'
 import Loading from '../../../components/common/Loading'
 import { RootState, AppDispatch } from '../../../features/store'
@@ -179,11 +178,11 @@ const EditPost = (): React.ReactElement => {
                     Content
                   </label>
                   <div className="mt-1">
-                    <MDEditor
+                    {/* <MDEditor
                       value={formData.content}
                       onChange={handleContentChange}
                       height={400}
-                    />
+                    /> */}
                   </div>
                 </div>
 

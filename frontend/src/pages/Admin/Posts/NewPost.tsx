@@ -2,11 +2,12 @@ import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import MDEditor from '@uiw/react-md-editor'
 import { savePost, uploadPostImage } from '../../../features/posts/postsSlice'
 import Loading from '../../../components/common/Loading'
 import { RootState, AppDispatch } from '../../../features/store'
 import { Post } from '../../../types/post'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 const NewPost = (): React.ReactElement => {
   const navigate = useNavigate()
@@ -50,10 +51,10 @@ const NewPost = (): React.ReactElement => {
     }))
   }
 
-  const handleContentChange = (value: string | undefined): void => {
+  const handleContentChange = (content: string): void => {
     setFormData(prev => ({
       ...prev,
-      content: value || ''
+      content
     }))
   }
 
@@ -134,10 +135,23 @@ const NewPost = (): React.ReactElement => {
                     Content
                   </label>
                   <div className="mt-1">
-                    <MDEditor
+                    <ReactQuill
                       value={formData.content}
                       onChange={handleContentChange}
-                      height={400}
+                      className="h-64 mb-12"
+                      modules={{
+                        toolbar: [
+                          [{ 'header': [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike'],
+                          ['blockquote', 'code-block'],
+                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                          [{ 'script': 'sub'}, { 'script': 'super' }],
+                          [{ 'indent': '-1'}, { 'indent': '+1' }],
+                          [{ 'color': [] }, { 'background': [] }],
+                          ['link', 'image'],
+                          ['clean']
+                        ]
+                      }}
                     />
                   </div>
                 </div>
