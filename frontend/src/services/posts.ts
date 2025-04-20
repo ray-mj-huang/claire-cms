@@ -20,8 +20,8 @@ export const createPost = async (postData: PostFormData): Promise<Post> => {
     const data = newDocSnap.data() as FirestorePost
     
     return {
-      id: docRef.id,
       ...postData,
+      id: docRef.id,
       createdAt: toDate(data.createdAt),
       updatedAt: toDate(data.updatedAt)
     }
