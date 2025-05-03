@@ -71,3 +71,6 @@ node_modules/
 
 .runtimeconfig.json
 build/
+
+# macOS system files
+**/.DS_Store
