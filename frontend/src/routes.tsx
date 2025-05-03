@@ -5,8 +5,6 @@ import About from './pages/About';
 import BlogList from './pages/Blog/BlogList';
 import BlogPost from './pages/Blog/BlogPost';
 import ProductList from './pages/Products/ProductList';
-import Services from './pages/Services';
-import Events from './pages/Events';
 import AdminDashboard from './pages/Admin/Dashboard';
 import PostsManagement from './pages/Admin/PostsManagement';
 import Settings from './pages/Admin/Settings';
@@ -32,8 +30,6 @@ export const router = createBrowserRouter([
       { path: 'products', element: <ProductList /> },
       { path: 'products/:productId', element: <ProductDetail /> },
       { path: 'return', element: <Return /> },
-      { path: 'services', element: <Services /> },
-      { path: 'events', element: <Events /> },
       { path: 'checkout/:productId', element: <Checkout /> },
     ],
   },

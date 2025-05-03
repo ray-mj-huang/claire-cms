@@ -11,9 +11,7 @@ interface NavigationItem {
 const navigation: NavigationItem[] = [
   { name: 'About', href: '/about' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Products', href: '/products' },
-  { name: 'Services', href: '/services' },
-  { name: 'Events', href: '/events' },
+  { name: 'Products', href: '/products' }
 ]
 
 const Navbar = (): React.ReactElement => {
