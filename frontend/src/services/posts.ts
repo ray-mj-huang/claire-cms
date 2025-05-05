@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, getDoc, doc, serverTimestamp, query, orderBy, updateDoc, Timestamp, FieldValue } from 'firebase/firestore'
+import { collection, addDoc, getDocs, getDoc, doc, serverTimestamp, query, orderBy, updateDoc, Timestamp, FieldValue, deleteDoc } from 'firebase/firestore'
 import { db } from './firebase'
 import { Post, PostFormData, FirestorePost } from '../types/post'
 
@@ -106,6 +106,17 @@ export const updatePost = async (postId: string, postData: Partial<PostFormData>
     }
   } catch (error) {
     console.error('Error updating post:', error)
+    throw error
+  }
+}
+
+export const deletePost = async (postId: string): Promise<string> => {
+  try {
+    const postRef = doc(db, 'posts', postId)
+    await deleteDoc(postRef)
+    return postId
+  } catch (error) {
+    console.error('Error deleting post:', error)
     throw error
   }
 } 

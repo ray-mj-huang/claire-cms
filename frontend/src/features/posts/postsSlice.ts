@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { createPost, fetchPosts, fetchPostById, updatePost } from '../../services/posts'
+import { createPost, fetchPosts, fetchPostById, updatePost, deletePost } from '../../services/posts'
 import { uploadImage } from '../../services/storage'
 import { Post, PostFormData } from '../../types/post'
 
@@ -56,6 +56,14 @@ export const updatePostById = createAsyncThunk<Post, { postId: string, postData:
   async ({ postId, postData }) => {
     const post = await updatePost(postId, postData)
     return post as Post
+  }
+)
+
+export const deletePostById = createAsyncThunk<string, string>(
+  'posts/deletePost',
+  async (postId) => {
+    await deletePost(postId)
+    return postId
   }
 )
 
@@ -150,6 +158,20 @@ const postsSlice = createSlice({
       .addCase(updatePostById.rejected, (state, action) => {
         state.updateStatus = 'failed'
         state.updateError = action.error.message || 'Failed to update post'
+      })
+      .addCase(deletePostById.pending, (state) => {
+        state.updateStatus = 'loading'
+      })
+      .addCase(deletePostById.fulfilled, (state, action: PayloadAction<string>) => {
+        state.updateStatus = 'succeeded'
+        state.posts = state.posts.filter(post => post.id !== action.payload)
+        if (state.currentViewingPost?.id === action.payload) {
+          state.currentViewingPost = null
+        }
+      })
+      .addCase(deletePostById.rejected, (state, action) => {
+        state.updateStatus = 'failed'
+        state.updateError = action.error.message || 'Failed to delete post'
       })
   }
 })
