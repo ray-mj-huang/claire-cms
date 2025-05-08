@@ -152,7 +152,7 @@ const EditPost = (): React.ReactElement => {
                       <div className="flex justify-center items-center w-full">
                         <label
                           htmlFor="file-upload"
-                          className="w-full relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                          className="w-full relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500"
                         >
                           <div className="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                             <div className="space-y-1 text-center">
@@ -187,7 +187,7 @@ const EditPost = (): React.ReactElement => {
                       required
                       value={formData.title}
                       onChange={handleChange}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg p-2"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-lg p-2"
                     />
                   </div>
                 </div>
@@ -228,7 +228,7 @@ const EditPost = (): React.ReactElement => {
                       value={formData.tags.join(', ')}
                       onChange={handleChange}
                       placeholder="tag1, tag2, tag3"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-md p-1"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-md p-1"
                     />
                   </div>
                   <p className="mt-2 text-sm text-gray-500">Separate tags with commas</p>
@@ -244,7 +244,7 @@ const EditPost = (): React.ReactElement => {
                       name="status"
                       value={formData.status}
                       onChange={handleChange}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-md p-1"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-md p-1"
                     >
                       <option value="draft">Draft</option>
                       <option value="published">Published</option>
@@ -261,17 +261,17 @@ const EditPost = (): React.ReactElement => {
             <button
               type="button"
               onClick={() => navigate('/admin/posts')}
-              className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={currentViewingPostStatus as string === 'loading'}
-              className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 currentViewingPostStatus as string === 'loading'
-                  ? 'bg-indigo-400 cursor-not-allowed'
-                  : 'bg-indigo-600 hover:bg-indigo-700'
+                  ? 'bg-primary-400 cursor-not-allowed'
+                  : 'bg-primary-500 hover:bg-primary-600'
               }`}
             >
               {currentViewingPostStatus as string === 'loading' ? 'Saving...' : 'Save'}

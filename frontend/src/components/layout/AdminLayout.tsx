@@ -41,7 +41,7 @@ const AdminLayout = (): React.ReactElement => {
         <div className="px-3 mt-2">
           <Link
             to="/admin/posts/new"
-            className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
+            className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-600"
           >
             <PencilSquareIcon
               className="mr-3 h-6 w-6 flex-shrink-0"

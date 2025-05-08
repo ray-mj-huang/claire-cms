@@ -52,7 +52,7 @@ const BlogList = (): React.ReactElement => {
                     </div>
                   )}
                 </div>
-                <h2 className="text-xl font-semibold text-gray-900 group-hover:text-indigo-600">
+                <h2 className="text-xl font-semibold text-gray-900 group-hover:text-primary-600">
                   {post.title}
                 </h2>
               </Link>

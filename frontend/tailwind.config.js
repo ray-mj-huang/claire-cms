@@ -9,7 +9,8 @@ export default {
       colors: {
         primary: {
           50: '#f8fafc',
-          // ... 可以根據需求自定義顏色
+          500: '#f55555',
+          600: '#e31b1b',
           900: '#0f172a',
         },
       },

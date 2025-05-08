@@ -51,7 +51,7 @@ const Return = (): React.ReactElement => {
             If you have any questions, please email{' '}
             <a 
               href="mailto:orders@example.com" 
-              className="text-indigo-600 hover:text-indigo-500"
+              className="text-primary-500 hover:text-primary-600"
             >
               orders@example.com
             </a>

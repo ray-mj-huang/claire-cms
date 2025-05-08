@@ -67,7 +67,7 @@ const PostManagement = (): React.ReactElement => {
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <Link
             to="/admin/posts/new"
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
           >
             Add post
           </Link>
@@ -111,7 +111,7 @@ const PostManagement = (): React.ReactElement => {
                         {post.createdAt ? format(post.createdAt, 'MMM d, yyyy') : '-'}
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <Link to={`/admin/posts/edit/${post.id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">
+                        <Link to={`/admin/posts/edit/${post.id}`} className="text-primary-600 hover:text-primary-900 mr-4">
                           Edit
                         </Link>
                         <Link to={`/blog/${post.id}`} className="text-blue-600 hover:text-blue-900 mr-4">

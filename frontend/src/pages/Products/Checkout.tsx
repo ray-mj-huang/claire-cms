@@ -67,7 +67,7 @@ const Checkout = (): React.ReactElement => {
       
       <button
         onClick={() => navigate(-1)}
-        className="text-indigo-600 hover:text-indigo-500"
+        className="text-primary-500 hover:text-primary-600"
       >
         ← Back to Product
       </button>

@@ -38,7 +38,7 @@ const ProductDetail = (): React.ReactElement => {
         <p className="text-red-500 mb-4">Error: {currentViewingProductError}</p>
         <button
           onClick={() => navigate(-1)}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-primary-500 hover:text-primary-600"
         >
           ← Back to Products
         </button>
@@ -52,7 +52,7 @@ const ProductDetail = (): React.ReactElement => {
         <p className="mb-4">Product not found</p>
         <button
           onClick={() => navigate(-1)}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-primary-500 hover:text-primary-600"
         >
           ← Back to Products
         </button>
@@ -91,7 +91,7 @@ const ProductDetail = (): React.ReactElement => {
             
             <button
               onClick={handlePurchase}
-              className="w-full bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="w-full bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
               Purchase
             </button>
@@ -102,7 +102,7 @@ const ProductDetail = (): React.ReactElement => {
       <div className="mt-8">
         <button
           onClick={() => navigate(-1)}
-          className="text-indigo-600 hover:text-indigo-500"
+          className="text-primary-500 hover:text-primary-600"
         >
           ← Back to Products
         </button>

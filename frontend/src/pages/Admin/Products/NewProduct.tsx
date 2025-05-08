@@ -163,7 +163,7 @@ const NewProduct = (): React.ReactElement => {
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${
                       errors.name ? 'border-red-300' : ''
                     }`}
                   />
@@ -184,7 +184,7 @@ const NewProduct = (): React.ReactElement => {
                     step="0.01"
                     value={formData.price}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${
                       errors.price ? 'border-red-300' : ''
                     }`}
                   />
@@ -203,7 +203,7 @@ const NewProduct = (): React.ReactElement => {
                     rows={3}
                     value={formData.description}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${
                       errors.description ? 'border-red-300' : ''
                     }`}
                   />
@@ -237,7 +237,7 @@ const NewProduct = (): React.ReactElement => {
                           <div className="flex text-sm text-gray-600">
                             <label
                               htmlFor="file-upload"
-                              className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                              className="relative cursor-pointer rounded-md bg-white font-medium text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-600"
                             >
                               <span>Upload a file</span>
                               <input
@@ -253,7 +253,7 @@ const NewProduct = (): React.ReactElement => {
                             <p className="pl-1">or drag and drop</p>
                           </div>
                           <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                          {uploadingImage && <p className="text-xs text-indigo-500">Uploading...</p>}
+                          {uploadingImage && <p className="text-xs text-primary-500">Uploading...</p>}
                         </div>
                       </div>
                     )}
@@ -268,17 +268,17 @@ const NewProduct = (): React.ReactElement => {
           <button
             type="button"
             onClick={() => navigate('/admin/products')}
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={status === 'loading'}
-            className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+            className={`ml-3 inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
               status === 'loading'
-                ? 'bg-indigo-400 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-700'
+                ? 'bg-primary-400 cursor-not-allowed'
+                : 'bg-primary-500 hover:bg-primary-600'
             }`}
           >
             {status === 'loading' ? 'Saving...' : 'Save'}
