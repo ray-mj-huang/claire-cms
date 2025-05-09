@@ -280,7 +280,7 @@ const EditProduct = (): React.ReactElement => {
                           <div className="flex text-sm text-gray-600">
                             <label
                               htmlFor="file-upload"
-                              className="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500"
+                              className="relative cursor-pointer rounded-md bg-white font-medium text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-600"
                             >
                               <span>Upload a file</span>
                               <input
