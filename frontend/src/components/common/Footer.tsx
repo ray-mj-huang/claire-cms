@@ -13,11 +13,9 @@ interface NavigationSection {
 const navigation: NavigationSection = {
   main: [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
     { name: 'Products', href: '/products' },
-    { name: 'Services', href: '/services' },
-    { name: 'Events', href: '/events' },
+    { name: 'About', href: '/about' }
   ],
 }
 
@@ -35,7 +33,7 @@ const Footer = (): React.ReactElement => {
           ))}
         </nav>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {new Date().getFullYear()} Your Company, Inc. All rights reserved.
+          &copy; {new Date().getFullYear()} Claire Ho All rights reserved.
         </p>
       </div>
     </footer>

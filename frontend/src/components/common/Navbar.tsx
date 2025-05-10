@@ -9,9 +9,10 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-  { name: 'About', href: '/about' },
+  { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Products', href: '/products' }
+  { name: 'Products', href: '/products' },
+  { name: 'About', href: '/about' }
 ]
 
 const Navbar = (): React.ReactElement => {
@@ -21,8 +22,9 @@ const Navbar = (): React.ReactElement => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <Link to="/" className="-m-1.5 p-1.5">
-            <span className="text-xl font-bold">Claire Ho</span>
+          <Link to="/" className="-m-1.5 p-1.5 flex items-center">
+            <img src="/logo.png" alt="Claire Ho Logo" className="h-8 w-auto mr-2" />
+            <span className="text-xl font-bold" style={{ lineHeight: 'normal' }}>Claire Ho</span>
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -50,8 +52,9 @@ const Navbar = (): React.ReactElement => {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link to="/" className="-m-1.5 p-1.5">
-              <span className="text-xl font-bold">Blog</span>
+            <Link to="/" className="-m-1.5 p-1.5 flex items-center">
+              <img src="/logo.png" alt="Claire Ho Logo" className="h-8 w-auto mr-2" />
+              <span className="text-xl font-bold" style={{ lineHeight: 'normal' }}>Claire Ho</span>
             </Link>
             <button
               type="button"

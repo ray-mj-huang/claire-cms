@@ -6,11 +6,11 @@ const Home = (): React.ReactElement => {
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Welcome to My Blog
+            <h1 className="text-6xl font-bold tracking-tight text-primary-500 sm:text-5xl">
+              Find Clarity, Move Forward.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              A place where I share my thoughts, experiences, and knowledge.
+              Insights, guidance, and resources to help you gain clarity, grow with confidence, and create lasting change.
             </p>
           </div>
         </div>

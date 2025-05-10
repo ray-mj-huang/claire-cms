@@ -6,7 +6,7 @@ const About = (): React.ReactElement => {
     <>
       <PageHeader 
         title="About Me" 
-        description="Welcome to my personal blog. I'm passionate about sharing knowledge and experiences."
+        description="Hi! I'm Claire. I’m a life coach dedicated to helping you gain clarity, confidence, and purpose. This blog is where I share guidance and inspiration for your personal growth."
       />
     </>
   )
