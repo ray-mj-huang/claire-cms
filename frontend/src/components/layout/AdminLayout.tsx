@@ -9,7 +9,7 @@ import {
   HomeIcon,
   ShoppingBagIcon
 } from '@heroicons/react/24/outline'
-
+import Navbar from '../common/Navbar'
 interface NavigationItem {
   name: string;
   href: string;
@@ -26,8 +26,8 @@ const AdminLayout = (): React.ReactElement => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* 側邊欄 */}
-      <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg">
+      <Navbar />
+      <div className="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg m-5 mt-[80px] rounded-lg">
         {/* Logo */}
         <div className="flex h-16 items-center px-6">
           <Link to="/admin" className="text-xl font-bold text-gray-900">
@@ -88,7 +88,6 @@ const AdminLayout = (): React.ReactElement => {
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <a
             href="/"
-            target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
           >
@@ -100,9 +99,7 @@ const AdminLayout = (): React.ReactElement => {
           </a>
         </div>
       </div>
-
-      {/* 主要內容區域 */}
-      <div className="pl-64">
+      <div className="pl-64 mt-[70px]">
         <main className="py-10">
           <div className="px-4 sm:px-6 lg:px-8">
             <Outlet />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 
 interface NavigationItem {
   name: string;
@@ -12,7 +12,8 @@ const navigation: NavigationItem[] = [
   { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
   { name: 'Products', href: '/products' },
-  { name: 'About', href: '/about' }
+  { name: 'About', href: '/about' },
+  { name: 'Admin', href: '/admin' }
 ]
 
 const Navbar = (): React.ReactElement => {
@@ -20,7 +21,7 @@ const Navbar = (): React.ReactElement => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 h-[70px]">
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5 flex items-center">
             <img src="/logo.png" alt="Claire Ho Logo" className="h-8 w-auto mr-2" />
@@ -41,9 +42,12 @@ const Navbar = (): React.ReactElement => {
             <Link
               key={item.name}
               to={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary-500 flex items-center"
             >
-              {item.name}
+              {item.name === 'Admin'
+                ? <UserCircleIcon className="h-6 w-6 mr-1" aria-hidden="true" />
+                : item.name
+              }
             </Link>
           ))}
         </div>
@@ -71,10 +75,13 @@ const Navbar = (): React.ReactElement => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 flex items-center"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item.name}
+                    {item.name === 'Admin'
+                      ? <UserCircleIcon className="h-6 w-6 mr-2" aria-hidden="true" />
+                      : item.name
+                    }
                   </Link>
                 ))}
               </div>
