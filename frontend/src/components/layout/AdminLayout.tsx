@@ -17,10 +17,8 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-  { name: 'Dashboard', href: '/admin', icon: ChartBarIcon },
   { name: 'Posts', href: '/admin/posts', icon: DocumentTextIcon },
-  { name: 'Products', href: '/admin/products', icon: ShoppingBagIcon },
-  { name: 'Settings', href: '/admin/settings', icon: Cog6ToothIcon },
+  { name: 'Products', href: '/admin/products', icon: ShoppingBagIcon }
 ]
 
 const AdminLayout = (): React.ReactElement => {
@@ -33,7 +31,7 @@ const AdminLayout = (): React.ReactElement => {
         {/* Logo */}
         <div className="flex h-16 items-center px-6">
           <Link to="/admin" className="text-xl font-bold text-gray-900">
-            Blog Admin
+            Admin
           </Link>
         </div>
 

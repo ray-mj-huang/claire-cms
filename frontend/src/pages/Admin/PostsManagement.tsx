@@ -69,7 +69,7 @@ const PostManagement = (): React.ReactElement => {
             to="/admin/posts/new"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
           >
-            Add post
+            New Post
           </Link>
         </div>
       </div>
